@@ -12,7 +12,7 @@ export function normalizeTitle(value) {
     .replace(/\s+/g, ' ');
 }
 
-export function matchTitle(dataset, { title, anilistId, malId, tmdbId, type, season } = {}) {
+export function matchTitle(dataset, { title, anilistId, malId, tmdbId, type, season, includeUnreviewed = false } = {}) {
   if (dataset?.schemaVersion !== 1 || !dataset.indexes?.ids || !dataset.indexes?.aliases || !Array.isArray(dataset.entries)) {
     throw new Error('Unsupported title dataset');
   }
@@ -34,7 +34,7 @@ export function matchTitle(dataset, { title, anilistId, malId, tmdbId, type, sea
   if (keys.length === 0) return { matched: false, reason: 'not-found' };
   const entriesByKey = new Map(dataset.entries.map(entry => [entry.key, entry]));
   const candidates = keys.map(key => entriesByKey.get(key)).filter(Boolean)
-    .filter(entry => (type == null || entry.type === type) && (season == null || entry.season === Number(season)));
+    .filter(entry => (includeUnreviewed || entry.reviewed === true) && (type == null || entry.type === type) && (season == null || entry.season === Number(season)));
 
   if (candidates.length !== 1) {
     return { matched: false, reason: candidates.length ? 'ambiguous' : 'constraint-mismatch', candidates: candidates.map(entry => entry.key) };
