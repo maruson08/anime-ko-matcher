@@ -28,6 +28,14 @@ test('rejects ambiguous aliases', () => {
   const sample = { ...dataset, indexes: { ...dataset.indexes, aliases: { ...dataset.indexes.aliases, shared: ['chainsaw-man-reze-arc', '100-girlfriends-season-2'] } } };
   assert.equal(matchTitle(sample, { title: 'shared' }).reason, 'ambiguous');
 });
-test('returns reviewed status so callers can require verified entries', () => {
-  assert.equal(matchTitle(dataset, { title: '100 Kanojo Season 2' }).reviewed, false);
+test('returns reviewed status for verified entries', () => {
+  assert.equal(matchTitle(dataset, { title: '100 Kanojo Season 2' }).reviewed, true);
+});
+test('rejects unreviewed matches by default', () => {
+  const sample = {
+    ...dataset,
+    entries: dataset.entries.map(entry => entry.key === '100-girlfriends-season-2' ? { ...entry, reviewed: false } : entry),
+  };
+  assert.equal(matchTitle(sample, { title: '100 Kanojo Season 2' }).matched, false);
+  assert.equal(matchTitle(sample, { title: '100 Kanojo Season 2', includeUnreviewed: true }).reviewed, false);
 });
