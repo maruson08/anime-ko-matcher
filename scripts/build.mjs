@@ -29,6 +29,10 @@ for (const entry of input.entries) {
   if (!sources.has(entry.source) || typeof entry.reviewed !== 'boolean') {
     throw new Error('Invalid provenance: ' + entry.key);
   }
+  if (entry.reviewed && (entry.source !== 'verified' || !Array.isArray(entry.references) ||
+      entry.references.length === 0 || entry.references.some(url => typeof url !== 'string' || !/^https:\/\//.test(url)))) {
+    throw new Error('Verified entry requires HTTPS provenance: ' + entry.key);
+  }
   if (!Array.isArray(entry.aliases) || entry.aliases.some(alias => typeof alias !== 'string' || !alias.trim())) {
     throw new Error('Invalid aliases: ' + entry.key);
   }
