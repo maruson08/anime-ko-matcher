@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "key": "chainsaw-man-reze-arc",
+      "ids": {},
+      "type": "movie",
+      "season": null,
+      "titles": {
+        "ko": "극장판 체인소 맨: 레제편",
+        "en": "Chainsaw Man – The Movie: Reze Arc",
+        "ja": "劇場版 チェンソーマン レゼ篇"
+      },
+      "aliases": ["체인소맨 레제편", "체인소 맨 레제 아크", "Chainsaw Man Reze Arc"],
+      "source": "manual",
+      "reviewed": false
+    },
+    {
+      "key": "100-girlfriends-season-2",
+      "ids": {},
+      "type": "tv",
+      "season": 2,
+      "titles": {
+        "ko": "너를 너무너무너무너무 좋아하는 100명의 그녀들 2기",
+        "en": "The 100 Girlfriends Who Really, Really, Really, Really, Really Love You Season 2",
+        "ja": "君のことが大大大大大好きな100人の彼女 第2期"
+      },
+      "aliases": ["100명의 그녀들 2기", "100 Kanojo Season 2"],
+      "source": "manual",
+      "reviewed": false
+    }
+  ]
+}
